@@ -3,7 +3,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
-public class MyCalculator extends Frame implements ActionListener{
+public class MyCalculator extends Frame implements ActionListener {
     TextField outputScreen;
     Panel btnsPanel;
 
@@ -40,14 +40,14 @@ public class MyCalculator extends Frame implements ActionListener{
         Font f = new Font("Digital-7", Font.PLAIN, 20);
 
         try {
-            //create the font to use. Specify the size!
+            // create the font to use. Specify the size!
             f = Font.createFont(Font.TRUETYPE_FONT, new File("./digital-7.ttf")).deriveFont(40f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            //register the font
+            // register the font
             ge.registerFont(f);
         } catch (IOException e) {
             e.printStackTrace();
-        } catch(FontFormatException e) {
+        } catch (FontFormatException e) {
             e.printStackTrace();
         }
 
@@ -70,57 +70,62 @@ public class MyCalculator extends Frame implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent ae) {
-  
+
         String str = ae.getActionCommand();
-        
-        if(str.equals("+")) {
-         
-         op = '+';
-         num1 = Integer.parseInt(outputScreen.getText());
-         outputScreen.setText("");
+
+        if (str.equals("+")) {
+
+            op = '+';
+            num1 = Integer.parseInt(outputScreen.getText());
+            outputScreen.setText("");
+        } else if (str.equals("-")) {
+            op = '-';
+            num1 = Integer.parseInt(outputScreen.getText());
+            outputScreen.setText("");
+        } else if (str.equals("*")) {
+            op = '*';
+            num1 = Integer.parseInt(outputScreen.getText());
+            outputScreen.setText("");
+        } else if (str.equals("/")) {
+            op = '/';
+            num1 = Integer.parseInt(outputScreen.getText());
+            outputScreen.setText("");
+        } else if (str.equals("=")) {
+
+            num2 = Integer.parseInt(outputScreen.getText());
+            try {
+
+                switch (op) {
+
+                    case '+':
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        break;
+                    case '/':
+                        result = num1 / num2;
+                        break;
+
+                }
+                outputScreen.setText(result + "");
+                result = 0;
+
+            } catch (ArithmeticException e) {
+                outputScreen.setText("Nice Try!");
+            }
+
+        } else if (str.equals("C")) {
+
+            outputScreen.setText("");
+            num1 = num2 = result = 0;
+        } else {
+            outputScreen.setText(outputScreen.getText() + str);
         }
-        else if(str.equals("-")) {
-         op = '-';
-         num1 = Integer.parseInt(outputScreen.getText());
-         outputScreen.setText("");
-        }
-        else if(str.equals("*")) {
-         op = '*';
-         num1 = Integer.parseInt(outputScreen.getText());
-         outputScreen.setText("");
-        }
-        else if(str.equals("/")) {
-         op = '/';
-         num1 = Integer.parseInt(outputScreen.getText());
-         outputScreen.setText("");
-        }
-        else if(str.equals("=")) {
-         
-         num2 = Integer.parseInt(outputScreen.getText());
-         
-         switch(op) {
-          
-          case '+' : result = num1 + num2;
-           break;
-          case '-' : result = num1 - num2;
-           break;
-          case '*' : result = num1 * num2;
-           break;
-          case '/' : result = num1 / num2;
-           break;
-         }
-         outputScreen.setText(result + "");
-         result = 0;
-        }
-        else if(str.equals("C")) {
-         
-         outputScreen.setText("");
-         num1 = num2 = result = 0;
-        }
-        else {
-         outputScreen.setText(outputScreen.getText() + str);
-        }
-       }
+    }
 
     public static void main(String[] args) {
         MyCalculator calci = new MyCalculator();
