@@ -9,7 +9,7 @@ class MyException extends Exception
 public class MyExceptionTest
 {
     static void foo(int x) throws MyException {
-        if (x < 18) {
+        if (x < 19) {
             throw new MyException("You are underage! Age: " + x);
         }
         else {
@@ -22,6 +22,7 @@ public class MyExceptionTest
             foo(21);
             foo(18);
             foo(15);
+            foo(19);
         }
         catch (MyException ex)
         {
