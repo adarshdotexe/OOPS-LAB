@@ -1,8 +1,18 @@
 import java.util.Random;
 
+class Counts {
+    public int count;
+    Counts(){
+        this.count = 0;
+    }
+
+    Counts getCount() {
+        return this;
+    }
+}
 public class RepeatCount extends Thread {
     private static final int ARRAY_SIZE = 100000;
-    private static final int NUM_THREADS = 1;
+    private static final int NUM_THREADS = 4;
     private static final int CHUNK_SIZE = ARRAY_SIZE / NUM_THREADS;
     private static int KEY;
 
@@ -13,13 +23,12 @@ public class RepeatCount extends Thread {
     private boolean flag;
     private String threadName;
     public static Random randomGenerator = new Random();
-    public int c;
+    static Counts counter;
 
     public RepeatCount(int startIndex, int endIndex, String threadName) {
         this.startIndex = startIndex;
         this.endIndex = endIndex;
         this.threadName = threadName;
-        this.c = 0;
     }
 
     @Override
@@ -28,7 +37,9 @@ public class RepeatCount extends Thread {
             if (KEY == myArray[i]) {
                 System.out.println("Search is successful by " + threadName);
                 flag = true;
-                c += 1;
+                synchronized(counter) {
+                    counter.count++;
+                }
             }
         }
         if (flag == false) {
@@ -37,7 +48,7 @@ public class RepeatCount extends Thread {
     }
 
     public static void main(String[] args) {
-        int count_total = 0;
+        counter = new Counts();
         myArray = new int[ARRAY_SIZE];
         myThreads = new RepeatCount[NUM_THREADS];
 
@@ -55,12 +66,11 @@ public class RepeatCount extends Thread {
         for (int i = 0; i < NUM_THREADS; i++) {
             try {
                 myThreads[i].join();
-                count_total += myThreads[i].c;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("The total count is " + count_total);
+        System.out.println("The total count is " + counter.count);
         long end = System.nanoTime();
 
         System.out.println("Time Taken: " + String.valueOf(end - start) + " nanoseconds");
