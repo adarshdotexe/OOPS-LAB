@@ -178,6 +178,7 @@ class MyFrame
 		String data[][] = { { "NAME", "MOBILE", "GENDER", "DOB", "ADDRESS" } };
 		model = new DefaultTableModel(data, column);
 		tout = new JTable(model);
+		model = (DefaultTableModel) tout.getModel();
 		tout.setFont(new Font("Arial", Font.PLAIN, 15));
 		tout.setSize(600, 400);
 		tout.setLocation(500, 100);
@@ -214,7 +215,6 @@ class MyFrame
 					+ "/" + (String) year.getSelectedItem();
 			String[] dataRow = { tname.getText(), tmno.getText(), data1, data2, tadd.getText() };
 			model.addRow(dataRow);
-			tout = new JTable(model);
 			res.setText("Registration Successfully..");
 		}
 

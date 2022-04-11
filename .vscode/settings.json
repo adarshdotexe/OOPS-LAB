@@ -1,6 +1,7 @@
 {
     "java.project.sourcePaths": [
         "Lab7",
-        "Lab_GUI"
+        "Lab_GUI",
+        "Lab8"
     ]
 }
