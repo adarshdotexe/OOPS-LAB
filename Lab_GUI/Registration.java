@@ -236,7 +236,6 @@ class MyFrame
 					break;
 				}
 			}
-			tout = new JTable(model);
 			res.setText("Deleted Name Successfully..");
 		}
 	}
