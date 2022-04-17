@@ -29,8 +29,8 @@ public class P2 {
                 } else {
                     System.out.println("Higher!");
                 }
+                tot_guess++;
             }
-            tot_guess++;
         }
     }
 
