@@ -20,9 +20,9 @@ class MyFrame
 	private JRadioButton female;
 	private ButtonGroup gengp;
 	private JLabel dob;
-	private JComboBox date;
-	private JComboBox month;
-	private JComboBox year;
+	private JComboBox<String> date;
+	private JComboBox<String> month;
+	private JComboBox<String> year;
 	private JLabel add;
 	private JTextArea tadd;
 	private JButton sub;
@@ -122,19 +122,19 @@ class MyFrame
 		dob.setLocation(100, 250);
 		c.add(dob);
 
-		date = new JComboBox(dates);
+		date = new JComboBox<String>(dates);
 		date.setFont(new Font("Arial", Font.PLAIN, 15));
 		date.setSize(50, 20);
 		date.setLocation(200, 250);
 		c.add(date);
 
-		month = new JComboBox(months);
+		month = new JComboBox<String>(months);
 		month.setFont(new Font("Arial", Font.PLAIN, 15));
 		month.setSize(60, 20);
 		month.setLocation(250, 250);
 		c.add(month);
 
-		year = new JComboBox(years);
+		year = new JComboBox<String>(years);
 		year.setFont(new Font("Arial", Font.PLAIN, 15));
 		year.setSize(60, 20);
 		year.setLocation(320, 250);
@@ -245,6 +245,6 @@ class MyFrame
 class Registration {
 
 	public static void main(String[] args) throws Exception {
-		MyFrame f = new MyFrame();
+		new MyFrame();
 	}
 }
